@@ -1,9 +1,33 @@
 .todo__body {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   font-family: Arial, Helvetica, sans-serif;
+  color: white;
 }
 
-#slideshow {
+#bg {
+  position: absolute;
+  z-index: -1;
+}
+
+#todo__add {
+  margin: 1rem;
+  width: 18rem;
+  height: 5rem;
+  background-color: grey;
+  resize: none;
+  padding: 1rem;
+  text-align: center;
+}
+
+#add__button {
+  margin: 1rem;
+  width: 18rem;
+  height: 2rem;
+  font-weight: bold;
+  background-color: grey;
+  border-radius: 10px;
 }
