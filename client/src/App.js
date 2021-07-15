@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./App.scss";
 
-let index = 0;
+// let index = 0;
 
 // function changeBanner() {
 //   [].forEach.call(document.images, function (v, i) {
@@ -14,11 +15,33 @@ let index = 0;
 // };
 
 export default function App() {
-  // const [bg, setbg] = useState();
+  const [item, setItem] = useState();
+  const [todolist, setTodolist] = useState(null);
 
-  // useEffect(() => {});
+  useEffect(() => {
+    axios.get("http://localhost:3000/todolist").then((res) => {
+      setTodolist(res.data);
+    });
+  });
 
-  function handleClick(e) {}
+  const handleChange = (e) => {
+    setItem({ ...item, [e.target.name]: e.target.value });
+  };
+
+  function handleClick(e) {
+    e.preventDefault();
+    setItem(e.target.value);
+  }
+
+  const submitButton = (e) => {
+    e.preventDefault();
+    axios
+      .post("/todolist", {
+        item: item.value,
+      })
+      .catch((err) => alert(err));
+    window.location.reload();
+  };
 
   return (
     <section id="slideshow">
@@ -29,15 +52,27 @@ export default function App() {
       />
       <div className="todo__body">
         <h1> &#128512; Felipe's To Do List &#129324;</h1>
-        <ol>
-          <li>shower</li>
-          <li>brush teeth</li>
-        </ol>
-
-        <textarea type="textarea" id="todo__add" />
-        <button id="add__button" onClick={() => handleClick}>
-          Add Item
-        </button>
+        <ul>
+          {todolist &&
+            todolist.map((item, index) => {
+              return <li key={index}>{item}</li>;
+            })}
+        </ul>
+        <form>
+          <textarea
+            className="add__item"
+            onSubmit={submitButton}
+            type="textarea"
+            name="item"
+            placeholder="add todo item"
+            value={setItem}
+            id="todo__add"
+            onChange={handleChange}
+          />
+          <button id="add__button" onClick={() => handleClick}>
+            Add Item
+          </button>
+        </form>
       </div>
     </section>
   );

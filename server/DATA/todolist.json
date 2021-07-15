@@ -1,0 +1,4 @@
+[
+  { "id": "1", "item": "brush teeth", "status": "completed" },
+  { "id": "2", "item": "shower", "status": "incomplete" }
+]
