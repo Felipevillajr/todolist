@@ -17,10 +17,15 @@
   margin: 1rem;
   width: 18rem;
   height: 5rem;
-  background-color: grey;
+  // background-color: grey;
   resize: none;
   padding: 1rem;
   text-align: center;
+  color: white;
+}
+
+.add__item {
+  color: white;
 }
 
 #add__button {
@@ -28,6 +33,6 @@
   width: 18rem;
   height: 2rem;
   font-weight: bold;
-  background-color: grey;
+  background-color: white;
   border-radius: 10px;
 }

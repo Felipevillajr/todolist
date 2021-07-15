@@ -2,27 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.scss";
 
-// let index = 0;
-
-// function changeBanner() {
-//   [].forEach.call(document.images, function (v, i) {
-//     document.images[i].hidden = i !== index;
-//   });
-//   index = (index + 1) % document.images.length;
-// }
-// window.onload = function () {
-//   setInterval(changeBanner, 1000);
-// };
-
 export default function App() {
   const [item, setItem] = useState();
-  const [todolist, setTodolist] = useState(null);
+  const [todolist, setTodolist] = useState();
 
   useEffect(() => {
     axios.get("http://localhost:3000/todolist").then((res) => {
       setTodolist(res.data);
+      console.log(todolist[0]);
     });
-  });
+  }, []);
 
   const handleChange = (e) => {
     setItem({ ...item, [e.target.name]: e.target.value });
@@ -40,23 +29,16 @@ export default function App() {
         item: item.value,
       })
       .catch((err) => alert(err));
-    window.location.reload();
   };
 
   return (
     <section id="slideshow">
-      <img
-        id="bg"
-        src="http://localhost:3000/IMGS/skaterdude.jpg"
-        alt="skater background"
-      />
+      <img id="bg" src="/IMGS/skaterdude.jpg" alt="skater background" />
       <div className="todo__body">
         <h1> &#128512; Felipe's To Do List &#129324;</h1>
         <ul>
-          {todolist &&
-            todolist.map((item, index) => {
-              return <li key={index}>{item}</li>;
-            })}
+          <li>{todolist[0].item}</li>
+          <li>{todolist[1].item}</li>
         </ul>
         <form>
           <textarea
