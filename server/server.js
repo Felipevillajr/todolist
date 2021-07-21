@@ -25,24 +25,24 @@ app.get("/todolist/:id", (req, res) => {
 });
 
 app.post("/todolist", (req, res) => {
-  const postreq = {
+  const post = {
     id: Math.floor(Math.random() * 100000000000000000 + 1).toString(),
-    item: req.body.item,
-    status: "incomplete",
+    item: req.body.data.item,
   };
+  res.send(res.body.item);
   fs.readFile("./DATA/todolist.json", (err, data) => {
     if (err) {
       console.log(err.data);
     } else {
       const parseMe = JSON.parse(data);
-      parseMe.push(postreq);
+      parseMe.push(post);
       const db = JSON.stringify(parseMe);
       fs.writeFile("./DATA/todolist.json", db, (err) => {
         if (err) {
           console.log(`error in writing file ${err}`);
         } else {
           console.log("writing successful");
-          res.send(postreq);
+          res.send(req.body.item);
         }
       });
     }

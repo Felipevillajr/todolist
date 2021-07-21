@@ -1,4 +1,4 @@
 [
-  { "id": "1", "item": "brush teeth", "status": "completed" },
-  { "id": "2", "item": "shower", "status": "incomplete" }
+  { "id": "1", "item": "brush teeth" },
+  { "id": "2", "item": "shower" }
 ]

@@ -9,7 +9,6 @@ export default function App() {
   useEffect(() => {
     axios.get("http://localhost:3000/todolist").then((res) => {
       setTodolist(res.data);
-      console.log(todolist[0]);
     });
   }, []);
 
@@ -25,10 +24,14 @@ export default function App() {
   const submitButton = (e) => {
     e.preventDefault();
     axios
-      .post("/todolist", {
+      .post("http://localhost:3000/todolist", {
         item: item.value,
       })
+      .then((res) => {
+        console.log(res);
+      })
       .catch((err) => alert(err));
+    window.location.reload();
   };
 
   return (
@@ -37,18 +40,27 @@ export default function App() {
       <div className="todo__body">
         <h1> &#128512; Felipe's To Do List &#129324;</h1>
         <ul>
-          <li>{todolist[0].item}</li>
-          <li>{todolist[1].item}</li>
+          {todolist &&
+            todolist.map((x, i) => {
+              return (
+                <>
+                  <li key={i}>
+                    {x.item}
+                    <input key={i} type="checkbox"></input>
+                  </li>
+                </>
+              );
+            })}
         </ul>
-        <form>
+        <form className="input__form" onSubmit={submitButton}>
           <textarea
             className="add__item"
             onSubmit={submitButton}
             type="textarea"
             name="item"
             placeholder="add todo item"
-            value={setItem}
             id="todo__add"
+            required
             onChange={handleChange}
           />
           <button id="add__button" onClick={() => handleClick}>

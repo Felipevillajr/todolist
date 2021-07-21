@@ -11,28 +11,49 @@
 #bg {
   position: absolute;
   z-index: -1;
+  width: 100%;
 }
 
 #todo__add {
   margin: 1rem;
   width: 18rem;
   height: 5rem;
-  // background-color: grey;
+  background-color: grey;
   resize: none;
   padding: 1rem;
   text-align: center;
   color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+::placeholder {
+  color: white;
 }
 
 .add__item {
-  color: white;
+  color: black;
 }
 
 #add__button {
   margin: 1rem;
   width: 18rem;
   height: 2rem;
-  font-weight: bold;
-  background-color: white;
+  font-weight: normal;
+  background-color: grey;
   border-radius: 10px;
+  color: white;
+  border: 1px solid white;
+}
+
+#add__button:focus {
+  border: 2px solid white;
+}
+
+.input__form {
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
